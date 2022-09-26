@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+.customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 70%;
+  table-layout: fixed;
+}
+
+.customers td, .customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.customers tr:nth-child(even){background-color: #f2f2f2;}
+
+.customers tr:hover {background-color: #ddd;}
+
+.customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #22adc9;
+  color: white;
+  text-align: center;
+
+}
+a{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: #22adc9;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.select-class {
+    width: 200px;
+    height: 40px;
+    padding: 5px;
+    border-color: #22adc9;
+    border-radius: 5px;
+    background-color: white;
+    border-width: 2px;
+    cursor:pointer;
+}
+
+select, option{
+    font-size:18px;
+}
+
+@media only screen and (max-width: 600px) {
+    .customers {
+        width: 100% !important;
+        table-layout: fixed;
+}
+    h1{
+        font-size: 40px;
+    }
+    #form-div{
+        display:flex;
+        flex-direction:column !important;
+    }
+    #form-div>input{
+        margin:5px !important;
+    }
+
+}
+
+</style>
+<title>Account Closing Details</title>
+</head>
+<body>
+    <div style="width: 100%; display: flex; align-items: center;justify-content: center; flex-direction: column; margin: 50px 0px; font-size: 20px; font-family: 'Courier New', Courier, monospace;">
+            <h2 style="text-align: center;">Account Closing Details</h2>
+            <form action="" method="post" style="width:100%">
+                {% csrf_token %}
+                <div style="width: 100%; display: flex; align-items: center;justify-content: center; flex-direction: row;">
+                    <span style="margin:20px; font-size:30px;">City</span>
+                    <select name="city" id="city" class="select-class" required>
+                        <option value="">--Select City--</option>
+                        <option value="Lahore">Lahore</option>
+                        <option value="Gujrat">Gujrat</option>
+                        <option value="Multan">Multan</option>
+                        <option value="Rawalpindi">Rawalpindi</option>
+                        <option value="Gujranwala">Gujranwala</option>
+                        <option value="FaislabadJhung">Faislabad/Jhung</option>
+
+                    </select>
+                </div>
+                <div id="form-div" style="width: 100%; display: flex; align-items: center;justify-content: center; flex-direction: row;">
+                    <span style="margin:20px; font-size:30px;">Start Date</span>
+                    <input style="margin:20px; background-color:#22adc9; border:none; padding:10px 50px;color:white; border-radius:5px;font-size:16px;" type="date" name="start-date" id="start-date" required>
+                    <span style="margin:20px; font-size:30px;">End Date</span>
+                    <input style="margin:20px; background-color:#22adc9; border:none; padding:10px 50px;color:white; border-radius:5px;font-size:16px;" type="date" name="end-date" id="end-date" required>
+                </div>
+                <div style="width: 100%; display: flex; align-items: center;justify-content: center; flex-direction: row;">
+                <input style="margin:20px; background-color:#22adc9; cursor:pointer; border:none; padding:10px 50px;color:white; border-radius:5px;font-size:16px;" type="submit" value="Generate Summary Report" >
+                </div>
+            </form>
+    </div>
+</body>
+</html>
+
