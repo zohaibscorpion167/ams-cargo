@@ -16,6 +16,44 @@ def account_closing_details(request):
         Model = apps.get_model('amcCargoApp', mdl)
         all_details = Model.objects.filter(Date__range=[start_date, end_date])
 
+        context = {
+        'all_details': all_details,
+        'start_date':start_date,
+        'end_date': end_date,
+        'city': city,
+        }
+
+        template_name = city.lower()+'.html'
+        return render(request, template_name, context)
+    return render(request, 'single.html')
+
+
+def summary_details(request):
+    if request.method == "POST":
+        total_balance = request.POST.get('total-balance')
+        recovery = request.POST.get('recovery')
+        city = request.POST.get('city')
+        
+        context = {
+            'total_balance':total_balance,
+            'recovery':recovery
+        }
+
+        return render(request, 'summary-final.html', context)
+
+
+
+@login_required(login_url='/admin/')
+def account_closing_detailss(request):
+    if request.method == "POST":
+        city = request.POST.get('city')
+        start_date = request.POST.get('start-date')
+        end_date = request.POST.get('end-date')
+
+        mdl = city+'Account'
+        Model = apps.get_model('amcCargoApp', mdl)
+        all_details = Model.objects.filter(Date__range=[start_date, end_date])
+
         total_amount_to_pay = 0
         total_truck_rent = 0
         for to_pay_total in all_details:
@@ -45,18 +83,3 @@ def account_closing_details(request):
 
         return render(request, 'summary.html', context)
     return render(request, 'single.html')
-
-
-def summary_details(request):
-    if request.method == "POST":
-        total_balance = request.POST.get('total-balance')
-        recovery = request.POST.get('recovery')
-        city = request.POST.get('city')
-        
-        context = {
-            'total_balance':total_balance,
-            'recovery':recovery
-        }
-
-        return render(request, 'summary-final.html', context)
-

@@ -3,10 +3,13 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
+h2{
+    margin:10px
+}
 .customers {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 70%;
+  width: 90%;
   table-layout: fixed;
 }
 
@@ -51,7 +54,10 @@ a{
 select, option{
     font-size:18px;
 }
-
+.hide-td, .hide-tr{
+    border: none !important;
+    background-color: transparent !important;
+}
 @media only screen and (max-width: 600px) {
     .customers {
         width: 100% !important;
@@ -75,13 +81,15 @@ select, option{
 </head>
 <body>
     <div style="width: 100%; display: flex; align-items: center;justify-content: center; flex-direction: column; margin: 5px 0px; font-size: 20px; font-family: 'Courier New', Courier, monospace;">
-        <h2 style="text-align: center;">Account Closing Summary</h2>
+    <a href="javascript:history.back()">Search Again</a>
+    </div>
+    <div style="width: 100%; display: flex; align-items: center;justify-content: center; flex-direction: column; margin: 5px 0px; font-size: 20px; font-family: 'Courier New', Courier, monospace;">
+        <h2 style="text-align: center;">Summary Report</h2>
         </div>
         {% if all_details %}
         <div style="width: 100%; display: flex; align-items: center;justify-content: center; flex-direction: column; margin:5px 0px;">
             <h2 style="text-align: center;">City: {{city}}</h2>
             <h2 style="text-align: center;">Start Date: {{start_date}} - End Date: {{end_date}}</h2>
-            <a href="javascript:history.back()">Search Again</a>
             <table class="customers">
                 <tr>
                     <th>Date</th>
@@ -106,52 +114,15 @@ select, option{
                     <td>{{detail.Truck_Rent}}</td>
                     <td>{{detail.Payment_Date}}</td>
                     <td>{{detail.Amount}}</td>
-
                     
                 </tr>
                 {% endfor %}
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td style="font-size:18px; font-weight: 600; text-align: left;">Previous Balance: {{previous_balance}}</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td style="font-size:18px; font-weight: 600;text-align: left;">Current To Pay: {{total_amount_to_pay}}</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td style="font-size:18px; font-weight: 600;text-align: left;">Total balance: {{total_balance}} </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <form method="post" action="/summary-details/">
-                    {% csrf_token %}
-                    <td style="font-size:18px; font-weight: 600;text-align: left;">Total Recovery: 
-                            <input style="font-size:18px;border:2px solid black; width: 100px;font-weight: 600; color: black;" name="recovery" type="number" required>
-                        <div style="display: flex; align-items: center; justify-content: center; padding: 20px ;">
-                            <input style="font-size:18px;border:none; width: 100px;font-weight: 600; color: black;" name="total-balance" value={{total_balance}} disabled hidden>
-                            <input style="font-size:18px;border:none; width: 100px;font-weight: 600; color: black;" name="city" value={{city}} disabled hidden>
-                            <input type="submit" value="Add Recovery Amount" style="margin:20px; background-color:#22adc9; border:none; padding:10px 50px;color:white; border-radius:5px;font-size:16px; cursor:pointer;">
-                        </div>
-                    </td>
-                    </form>
-                </tr>
             </table>
         </div>
         {% else %}
     <div style="display: flex;flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
         <div style="width: 100%; display: flex; align-items: center;justify-content: center; flex-direction: column; margin: 50px 0px; font-size: 20px; font-family: 'Courier New', Courier, monospace;">
             <h2>Sorry, No Results Found</h2>
-            <a href="javascript:history.back()">Search Again</a>
         </div>
         {% endif %}
     </div>

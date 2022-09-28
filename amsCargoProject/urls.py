@@ -24,7 +24,7 @@ admin.site.index_title = "AMS Cargo Company"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('closing-details/',  account_closing_details, name='lahore-closing'),
+    path('',  account_closing_details, name=''),
     path('summary-details/',  summary_details, name='summary-closing')
     
     ]
